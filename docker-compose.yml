@@ -1,0 +1,50 @@
+version: '3'
+services:
+  zookeeper:
+    image: bitnami/zookeeper:3.7
+    restart: always
+    environment:
+    - ALLOW_ANONYMOUS_LOGIN=yes
+    ports:
+      - 2181:2181
+    volumes:
+      - "zookeeper_data:/bitnami"
+  kafka:
+    image: bitnami/kafka:3
+    depends_on:
+      - zookeeper
+    restart: on-failure
+    hostname: kafka
+    ports:
+      - 9091:9091
+      - 9092:9092
+    volumes:
+      - "./kafkaRunner/data/kafka/bitnami:/bitnami"
+    environment:
+      - KAFKA_CFG_ADVERTISED_HOST_NAME=kafka
+      - KAFKA_CFG_ADVERTISED_PORT=9091
+      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9091,EXTERNAL://localhost:9092
+
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=CLIENT://kafka:9091,EXTERNAL://0.0.0.0:9092
+
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
+
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+  maindb:
+    container_name: maindb
+    image: postgres:12
+    hostname: maindb
+    environment:
+      POSTGRES_USER: maindb
+      POSTGRES_PASSWORD: maindb
+      POSTGRES_DB: maindb
+    ports:
+      - "5430:5432"
+    volumes:
+      - /mnt/d/skripsi/code/project/postgre/maindb:/var/lib/maindb 
+volumes:
+  zookeeper_data:
+  kafka_data:
+  maindb:

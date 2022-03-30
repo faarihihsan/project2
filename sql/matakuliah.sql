@@ -1,0 +1,10 @@
+INSERT INTO public.matakuliah (id, nama, sks) VALUES (1, 'ddp1', 4);
+INSERT INTO public.matakuliah (id, nama, sks) VALUES (2, 'ddp2', 4);
+INSERT INTO public.matakuliah (id, nama, sks) VALUES (3, 'mpkta', 6);
+INSERT INTO public.matakuliah (id, nama, sks) VALUES (4, 'mpktb', 6);
+INSERT INTO public.matakuliah (id, nama, sks) VALUES (5, 'sda', 3);
+INSERT INTO public.matakuliah (id, nama, sks) VALUES (6, 'ppw', 3);
+INSERT INTO public.matakuliah (id, nama, sks) VALUES (7, 'adbis', 3);
+INSERT INTO public.matakuliah (id, nama, sks) VALUES (8, 'ppm', 3);
+INSERT INTO public.matakuliah (id, nama, sks) VALUES (9, 'propensi', 6);
+INSERT INTO public.matakuliah (id, nama, sks) VALUES (10, 'komas', 4);
